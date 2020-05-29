@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`identifier reverse 1. identifier reverse: 1. identifier reverse 1`] = `
+
+function sayHi(person) {
+  // do some work
+  5 + 4;
+  const a = 145;
+  a + 4;
+  return 'Hello ' + person + '!'
+}
+
+function noReturn() {
+  console.log('test')
+}
+
+const testArrow = () => {
+  const x = 3 + 5
+  console.log(x)
+  return x
+}
+
+class TestClass {
+  testMethod() {
+    console.log('test class', this)
+  }
+}
+
+sayHi()
+noReturn()
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+if (typeof autotracer !== "function") {
+  var autotracer = require("performance-measurer/autotracer");
+}
+
+function sayHi(person) {
+  // do some work
+  5 + 4;
+  const a = 145;
+  a + 4;
+  return "Hello " + person + "!";
+}
+
+sayHi = autotracer.wrapFunction("unknown file", "sayHi", sayHi);
+
+function noReturn() {
+  console.log("test");
+}
+
+noReturn = autotracer.wrapFunction("unknown file", "noReturn", noReturn);
+const testArrow = autotracer.wrapFunction("unknown file", "testArrow", () => {
+  const x = 3 + 5;
+  console.log(x);
+  return x;
+});
+
+class TestClass {
+  testMethod() {
+    console.log("test class", this);
+  }
+}
+
+autotracer.wrapClass("unknown file", "TestClass", TestClass);
+sayHi();
+noReturn();
+
+
+`;

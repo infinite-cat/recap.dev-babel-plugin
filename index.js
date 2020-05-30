@@ -4,8 +4,8 @@ const get = require('lodash.get')
 const ignoreFiles = ['./src/registerServiceWorker.ts']
 
 module.exports = function ({ types: t }) {
-  const header = 'if (typeof autotracer !== "function") { var autotracer = require("@autotracing/client"); }';
-  const replaceFunction = (fileName, functionName) => `${functionName} = autotracer.wrapFunction('${fileName}', '${functionName}', ${functionName})`
+  const header = 'if (typeof recapTracer !== "function") { var recapTracer = require("@recap.dev/client"); }';
+  const replaceFunction = (fileName, functionName) => `${functionName} = recapTracer.wrapFunction('${fileName}', '${functionName}', ${functionName})`
 
   return {
     visitor: {
@@ -15,7 +15,7 @@ module.exports = function ({ types: t }) {
         node.get('body')[0].insertBefore(babelParser.parse(header).program.body[0]);
         node.traverse({
           'ArrowFunctionExpression'(path) {
-            if (path.parent.type === 'CallExpression' && get(path, 'parent.callee.object.name') === 'autotracer') {
+            if (path.parent.type === 'CallExpression' && get(path, 'parent.callee.object.name') === 'recapTracer') {
               return
             }
             let functionName = null
@@ -38,7 +38,7 @@ module.exports = function ({ types: t }) {
 
             path.replaceWith(t.callExpression(
               t.memberExpression(
-                t.identifier('autotracer'),
+                t.identifier('recapTracer'),
                 t.identifier('wrapFunction')
               ), [
                 t.stringLiteral(fileName),
@@ -52,7 +52,7 @@ module.exports = function ({ types: t }) {
 
             path.insertAfter(t.callExpression(
               t.memberExpression(
-                t.identifier('autotracer'),
+                t.identifier('recapTracer'),
                 t.identifier('wrapClass')
               ), [
                 t.stringLiteral(fileName),

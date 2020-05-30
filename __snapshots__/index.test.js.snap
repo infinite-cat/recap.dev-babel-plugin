@@ -31,8 +31,8 @@ noReturn()
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-if (typeof autotracer !== "function") {
-  var autotracer = require("performance-measurer/autotracer");
+if (typeof recapTracer !== "function") {
+  var recapTracer = require("@recap.dev/client");
 }
 
 function sayHi(person) {
@@ -43,14 +43,14 @@ function sayHi(person) {
   return "Hello " + person + "!";
 }
 
-sayHi = autotracer.wrapFunction("unknown file", "sayHi", sayHi);
+sayHi = recapTracer.wrapFunction("unknown file", "sayHi", sayHi);
 
 function noReturn() {
   console.log("test");
 }
 
-noReturn = autotracer.wrapFunction("unknown file", "noReturn", noReturn);
-const testArrow = autotracer.wrapFunction("unknown file", "testArrow", () => {
+noReturn = recapTracer.wrapFunction("unknown file", "noReturn", noReturn);
+const testArrow = recapTracer.wrapFunction("unknown file", "testArrow", () => {
   const x = 3 + 5;
   console.log(x);
   return x;
@@ -62,7 +62,7 @@ class TestClass {
   }
 }
 
-autotracer.wrapClass("unknown file", "TestClass", TestClass);
+recapTracer.wrapClass("unknown file", "TestClass", TestClass);
 sayHi();
 noReturn();
 

@@ -1,6 +1,6 @@
 {
   "name": "@recap.dev/babel-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "author": "Arseny Yankovsky",
   "repository": {

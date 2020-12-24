@@ -1,7 +1,10 @@
 {
   "name": "@recap.dev/babel-plugin",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "index.js",
+  "description": "Babel plugin to set up function-level tracing for recap.dev, an open-source cloud observability and tracing solution for modern JavaScript backends.",
+  "keywords": ["tracing", "monitoring", "server monitoring", "observability", "dashboard"],
+  "homepage": "https://recap.dev",
   "author": "Arseny Yankovski",
   "repository": {
     "type": "git",
